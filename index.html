@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cumpleaños y Bautizo Ailany</title>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+  --bg:#f6f8fc;
+  --card:#ffffff;
+  --dark:#132238;
+  --blue:#3157ff;
+  --pink:#ff6fae;
+  --gold:#f5b942;
+  --muted:#667085;
+  --shadow:0 18px 45px rgba(20,35,70,.12);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+  font-family:Segoe UI,system-ui,sans-serif;
+  background:radial-gradient(circle at top left,#eaf0ff,#f8fbff 40%,#fff);
+  color:var(--dark);
+}
+
+.container{
+  width:100%;
+  max-width:1500px;
+  margin:0 auto;
+  padding:22px;
+}
+
+.hero{
+  padding:30px;
+  border-radius:30px;
+  color:white;
+  background:linear-gradient(135deg,#132238,#3157ff 55%,#ff6fae);
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(26px,4vw,48px);
+}
+
+.hero p{
+  margin:8px 0 0;
+  opacity:.92;
+}
+
+.filters{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  margin-bottom:20px;
+}
+
+select{
+  width:100%;
+  border:0;
+  padding:13px 15px;
+  border-radius:16px;
+  background:white;
+  box-shadow:0 8px 20px rgba(20,35,70,.08);
+  font-weight:600;
+}
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:16px;
+  margin-bottom:22px;
+}
+
+.kpi{
+  background:rgba(255,255,255,.95);
+  border-radius:24px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+}
+
+.kpi::after{
+  content:"";
+  position:absolute;
+  right:-30px;
+  top:-30px;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--pink));
+  opacity:.16;
+}
+
+.kpi span{
+  font-size:13px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+.kpi strong{
+  display:block;
+  font-size:36px;
+  margin-top:8px;
+  color:#132238;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:18px;
+  align-items:start;
+}
+
+.card{
+  background:white;
+  border-radius:26px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  min-width:0;
+  overflow:hidden;
+}
+
+.card h3{
+  margin:0 0 14px;
+  color:#132238;
+}
+
+.col-4{grid-column:span 4;}
+.col-6{grid-column:span 6;}
+.col-12{grid-column:span 12;}
+
+.chart-box{
+  position:relative;
+  width:100%;
+  height:300px;
+  max-height:300px;
+}
+
+.chart-box.tall{
+  height:360px;
+  max-height:360px;
+}
+
+canvas{
+  width:100% !important;
+  height:100% !important;
+}
+
+.table-wrap{
+  overflow:auto;
+  max-height:480px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+  min-width:900px;
+}
+
+th{
+  position:sticky;
+  top:0;
+  background:#132238;
+  color:white;
+  padding:12px;
+  text-align:left;
+  z-index:2;
+}
+
+td{
+  padding:11px 12px;
+  border-bottom:1px solid #eef1f6;
+}
+
+tr:hover{
+  background:#f5f7ff;
+}
+
+.badge{
+  padding:5px 10px;
+  border-radius:999px;
+  background:#eef2ff;
+  color:#3157ff;
+  font-weight:700;
+  font-size:12px;
+}
+
+@media(max-width:1000px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .col-4,.col-6,.col-12{
+    grid-column:span 1;
+  }
+
+  .chart-box{
+    height:260px;
+    max-height:260px;
+  }
+
+  .chart-box.tall{
+    height:310px;
+    max-height:310px;
+  }
+}
+
+@media(max-width:600px){
+  .container{
+    padding:14px;
+  }
+
+  .hero{
+    padding:22px;
+    border-radius:24px;
+  }
+
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .kpi{
+    padding:16px;
+  }
+
+  .kpi strong{
+    font-size:28px;
+  }
+
+  .card{
+    padding:16px;
+    border-radius:22px;
+  }
+
+  .chart-box{
+    height:230px;
+    max-height:230px;
+  }
+
+  .chart-box.tall{
+    height:280px;
+    max-height:280px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <section class="hero">
+    <h1>Dashboard Cumpleaños y Bautizo de Ailany</h1>
+    <p>Control avanzado de invitados, responsables, grupos, mesas, adultos y niños.</p>
+  </section>
+
+  <section class="filters">
+    <select id="fResponsable"><option value="">Todos los responsables</option></select>
+    <select id="fCategoria"><option value="">Todas las categorías</option></select>
+    <select id="fTipo"><option value="">Adultos y niños</option></select>
+    <select id="fMesa"><option value="">Todas las mesas</option></select>
+  </section>
+
+  <section class="kpis">
+    <div class="kpi"><span>Total invitados</span><strong id="kTotal">0</strong></div>
+    <div class="kpi"><span>Adultos</span><strong id="kAdultos">0</strong></div>
+    <div class="kpi"><span>Niños</span><strong id="kNinos">0</strong></div>
+    <div class="kpi"><span>Grupos</span><strong id="kGrupos">0</strong></div>
+    <div class="kpi"><span>Mesas usadas</span><strong id="kMesas">0</strong></div>
+    <div class="kpi"><span>Promedio por mesa</span><strong id="kPromMesa">0</strong></div>
+  </section>
+
+  <section class="grid">
+    <div class="card col-4">
+      <h3>Adultos vs Niños</h3>
+      <div class="chart-box">
+        <canvas id="chartTipo"></canvas>
+      </div>
+    </div>
+
+    <div class="card col-4">
+      <h3>Invitados por Responsable</h3>
+      <div class="chart-box">
+        <canvas id="chartResponsable"></canvas>
+      </div>
+    </div>
+
+    <div class="card col-4">
+      <h3>Invitados por Categoría</h3>
+      <div class="chart-box">
+        <canvas id="chartCategoria"></canvas>
+      </div>
+    </div>
+
+    <div class="card col-6">
+      <h3>Personas por Mesa</h3>
+      <div class="chart-box tall">
+        <canvas id="chartMesa"></canvas>
+      </div>
+    </div>
+
+    <div class="card col-6">
+      <h3>Top Grupos más numerosos</h3>
+      <div class="chart-box tall">
+        <canvas id="chartGrupo"></canvas>
+      </div>
+    </div>
+
+    <div class="card col-12">
+      <h3>Detalle de Invitados</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Responsable</th>
+              <th>Invitado</th>
+              <th>Grupo</th>
+              <th>Rol</th>
+              <th>Categoría</th>
+              <th>Tipo</th>
+              <th>Mesa</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="tabla"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+let dataOriginal = [];
+let charts = {};
+
+const colores = [
+  "#3157ff","#ff6fae","#f5b942","#31c48d",
+  "#7c3aed","#06b6d4","#f97316","#ef4444",
+  "#14b8a6","#64748b"
+];
+
+function normalizar(v){
+  return (v ?? "").toString().trim();
+}
+
+function obtenerCampo(r, posibles){
+  for(const p of posibles){
+    if(r[p] !== undefined) return normalizar(r[p]);
+  }
+  return "";
+}
+
+function limpiarData(data){
+  return data
+    .map(r => ({
+      ID: obtenerCampo(r, ["ID","Id","id"]),
+      Responsable: obtenerCampo(r, ["Responsable","Invitado por","INVITADO POR"]),
+      Invitado: obtenerCampo(r, ["Invitado","Nombre Invitado","NOMBRE INVITADO"]),
+      Grupo: obtenerCampo(r, ["Grupo","Familia","Grupo Familiar"]),
+      Rol: obtenerCampo(r, ["Rol","Rol Especial"]),
+      Categoria: obtenerCampo(r, ["Categoría","Categoria","CATEGORIA"]),
+      Tipo: obtenerCampo(r, ["Tipo","Adulto/Niño","Adulto Nino"]),
+      Mesa: obtenerCampo(r, ["Mesa","Mesa Bautizo"]),
+      Estado: obtenerCampo(r, ["Estado","Confirmó","Confirmo"])
+    }))
+    .filter(r => {
+      const invitado = r.Invitado.toLowerCase();
+      if(!r.Invitado) return false;
+      if(["invitado","nombre invitado","nombre"].includes(invitado)) return false;
+      if(r.Responsable.toLowerCase() === "responsable") return false;
+      if(r.ID.toLowerCase() === "id") return false;
+      return true;
+    });
+}
+
+Papa.parse("./datoscumple.csv?v=" + new Date().getTime(), {
+  download:true,
+  header:true,
+  skipEmptyLines:true,
+  complete:function(results){
+    dataOriginal = limpiarData(results.data);
+    cargarFiltros(dataOriginal);
+    actualizarDashboard();
+  },
+  error:function(err){
+    alert("No se pudo leer datoscumple.csv. Revisa que esté en la misma carpeta que dashcumple.html");
+    console.error(err);
+  }
+});
+
+function unicos(data,campo){
+  return [...new Set(data.map(x => x[campo]).filter(Boolean))].sort();
+}
+
+function llenarSelect(id,valores){
+  const s = document.getElementById(id);
+  valores.forEach(v => {
+    const op = document.createElement("option");
+    op.value = v;
+    op.textContent = v;
+    s.appendChild(op);
+  });
+}
+
+function cargarFiltros(data){
+  llenarSelect("fResponsable", unicos(data,"Responsable"));
+  llenarSelect("fCategoria", unicos(data,"Categoria"));
+  llenarSelect("fTipo", unicos(data,"Tipo"));
+  llenarSelect("fMesa", unicos(data,"Mesa"));
+
+  document.querySelectorAll("select").forEach(s => {
+    s.addEventListener("change", actualizarDashboard);
+  });
+}
+
+function filtrar(){
+  const responsable = document.getElementById("fResponsable").value;
+  const categoria = document.getElementById("fCategoria").value;
+  const tipo = document.getElementById("fTipo").value;
+  const mesa = document.getElementById("fMesa").value;
+
+  return dataOriginal.filter(r =>
+    (!responsable || r.Responsable === responsable) &&
+    (!categoria || r.Categoria === categoria) &&
+    (!tipo || r.Tipo === tipo) &&
+    (!mesa || r.Mesa === mesa)
+  );
+}
+
+function contarPor(data,campo){
+  const obj = {};
+  data.forEach(r => {
+    const key = r[campo] || "Sin dato";
+    obj[key] = (obj[key] || 0) + 1;
+  });
+  return obj;
+}
+
+function topN(obj,n=10){
+  return Object.fromEntries(
+    Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,n)
+  );
+}
+
+function actualizarDashboard(){
+  const data = filtrar();
+
+  const adultos = data.filter(x => x.Tipo.toLowerCase() === "adulto").length;
+  const ninos = data.filter(x => ["niño","nino"].includes(x.Tipo.toLowerCase())).length;
+  const mesas = new Set(data.map(x => x.Mesa).filter(Boolean)).size;
+  const grupos = new Set(data.map(x => x.Grupo).filter(Boolean)).size;
+
+  document.getElementById("kTotal").textContent = data.length;
+  document.getElementById("kAdultos").textContent = adultos;
+  document.getElementById("kNinos").textContent = ninos;
+  document.getElementById("kMesas").textContent = mesas;
+  document.getElementById("kGrupos").textContent = grupos;
+  document.getElementById("kPromMesa").textContent = mesas ? (data.length / mesas).toFixed(1) : 0;
+
+  grafico("chartTipo","doughnut",contarPor(data,"Tipo"));
+  grafico("chartResponsable","doughnut",contarPor(data,"Responsable"));
+  grafico("chartCategoria","bar",contarPor(data,"Categoria"));
+  grafico("chartMesa","bar",contarPor(data,"Mesa"));
+  grafico("chartGrupo","bar",topN(contarPor(data,"Grupo"),10),true);
+
+  pintarTabla(data);
+}
+
+function grafico(id,tipo,obj,horizontal=false){
+  if(charts[id]) charts[id].destroy();
+
+  const labels = Object.keys(obj);
+  const values = Object.values(obj);
+
+  charts[id] = new Chart(document.getElementById(id), {
+    type: tipo,
+    data:{
+      labels,
+      datasets:[{
+        label:"Invitados",
+        data:values,
+        backgroundColor: labels.map((_,i)=>colores[i % colores.length]),
+        borderColor:"#ffffff",
+        borderWidth:2,
+        borderRadius: tipo === "bar" ? 10 : 0
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      indexAxis: horizontal ? "y" : "x",
+      animation:{
+        duration:900,
+        easing:"easeOutQuart"
+      },
+      plugins:{
+        legend:{
+          display: tipo !== "bar",
+          position:"bottom",
+          labels:{
+            usePointStyle:true,
+            boxWidth:10
+          }
+        },
+        tooltip:{
+          callbacks:{
+            label:function(ctx){
+              const total = values.reduce((a,b)=>a+b,0);
+              const pct = total ? ((ctx.raw/total)*100).toFixed(1) : 0;
+              return ` ${ctx.raw} invitados (${pct}%)`;
+            }
+          }
+        }
+      },
+      scales: tipo === "bar" ? {
+        x:{
+          beginAtZero:true,
+          ticks:{precision:0},
+          grid:{display:false}
+        },
+        y:{
+          beginAtZero:true,
+          ticks:{precision:0},
+          grid:{color:"#eef1f6"}
+        }
+      } : {}
+    }
+  });
+}
+
+function pintarTabla(data){
+  const tbody = document.getElementById("tabla");
+  tbody.innerHTML = "";
+
+  data.forEach(r => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${r.ID}</td>
+        <td>${r.Responsable}</td>
+        <td><strong>${r.Invitado}</strong></td>
+        <td>${r.Grupo}</td>
+        <td>${r.Rol || "Ninguno"}</td>
+        <td>${r.Categoria}</td>
+        <td><span class="badge">${r.Tipo}</span></td>
+        <td>${r.Mesa}</td>
+        <td>${r.Estado || "Confirmado"}</td>
+      </tr>
+    `;
+  });
+}
+</script>
+
+</body>
+</html>

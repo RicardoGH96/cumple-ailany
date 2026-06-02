@@ -1,0 +1,63 @@
+﻿ID;Responsable;Invitado;Grupo;Categoría;Cumpleaños;Bautizo;Tipo;Mesa;Confirmó
+1;Ricardo;Papá Ailany;García Muñoz;Familia Directa;1;1;Adulto;1;Confirmado
+2;Ricardo;Papá;García Hernández;Familia Directa;1;1;Adulto;2;Confirmado
+3;Ricardo;Mamá;García Hernández;Familia Directa;1;1;Adulto;2;Confirmado
+4;Ricardo;Tuto;García Hernández;Familia Directa;1;1;Adulto;2;Confirmado
+5;Ricardo;Perico;García Hernández;Familia Directa;1;1;Adulto;2;Confirmado
+6;Ricardo;Javier Hernández;Hernández Acasiete;Familia Directa;1;1;Adulto;2;Confirmado
+7;Ricardo;Genma ;Hernández Acasiete;Familia Directa;1;1;Adulto;2;Confirmado
+8;Ricardo;Tio Carlos;Hernández Martínez;Familia Directa;1;1;Adulto;3;Confirmado
+9;Ricardo;Carlos Hernández M;Padrino Bautizo;Familia Directa;1;1;Adulto;1;Confirmado
+10;Ricardo;Andrea;Hernández Martínez;Familia Directa;1;1;Adulto;3;Confirmado
+11;Ricardo;Claudia;Hernández Martínez;Familia Directa;1;1;Adulto;3;Confirmado
+12;Ricardo;Camila;Hernández Martínez;Familia Directa;1;1;Adulto;3;Confirmado
+13;Ricardo;Tia July;Hernández Martínez;Familia Directa;1;1;Adulto;3;Confirmado
+14;Ricardo;Tio Manuel;Hernández Muñoz;Familia Directa;1;1;Adulto;3;Confirmado
+15;Ricardo;Tia Sully;Hernández Muñoz;Familia Directa;1;1;Adulto;3;Confirmado
+16;Ricardo;Gina;Muñoz Hernández;Familia Directa;1;1;Adulto;4;Confirmado
+17;Ricardo;Jesus;Muñoz Hernández;Familia Directa;1;1;Adulto;4;Confirmado
+18;Ricardo;Cumpa Manuel;Hernández Tipacti;Familia Directa;1;1;Adulto;4;Confirmado
+19;Ricardo;Lío;Hernández Tipacti;Familia Directa;1;1;Niño;4;Confirmado
+20;Ricardo;Comadre Kathy;Hernández Tipacti;Familia Directa;1;1;Adulto;4;Confirmado
+21;Ricardo;Tia Nena;Acasiete Euribe;Familia Directa;1;1;Adulto;5;Confirmado
+22;Ricardo;Tia Marisol;Acasiete Euribe;Familia Directa;1;1;Adulto;5;Confirmado
+23;Ricardo;El Papi;Acasiete Euribe;Familia Directa;1;1;Adulto;5;Confirmado
+24;Ricardo;Tia Ana;Peña Hernández;Familia Directa;1;1;Adulto;5;Confirmado
+25;Ricardo;Tio Miguel;Peña Hernández;Familia Directa;1;1;Adulto;5;Confirmado
+26;Ricardo;Miguelito;Peña Hernández;Familia Directa;1;1;Adulto;5;Confirmado
+27;Ricardo;Rodrigo;Peña Hernández;Familia Directa;1;1;Adulto;5;Confirmado
+28;Ricardo;Juan Carlos;Fam Juan Carlos;Familia Extendida;1;1;Adulto;6;Confirmado
+29;Ricardo;hija 1;Fam Juan Carlos;Familia Extendida;1;1;Niño;6;Confirmado
+30;Ricardo;hija 2;Fam Juan Carlos;Familia Extendida;1;1;Niño;6;Confirmado
+31;Ricardo;Juan Carlos;Fam Juan Carlos;Familia Extendida;1;1;Adulto;6;Confirmado
+32;Ricardo;Chicha;Fam Chicha;Familia Extendida;1;1;Adulto;7;Confirmado
+33;Ricardo;Hija 1 de Chicha;Fam Chicha;Familia Extendida;1;1;Niño;7;Confirmado
+34;Ricardo;Hija 2 de Chicha;Fam Chicha;Familia Extendida;1;1;Niño;7;Confirmado
+35;Ricardo;Esposa de Chicha;Fam Chicha;Familia Extendida;1;1;Adulto;7;Confirmado
+36;Ricardo;Chino Julio;Fam Chino Julio;Familia Extendida;1;1;Adulto;6;Confirmado
+37;Ricardo;Hijo 1 de chino Julio;Fam Chino Julio;Familia Extendida;1;1;Niño;6;Confirmado
+38;Ricardo;Hijo 2 de chino Julio;Fam Chino Julio;Familia Extendida;1;1;Niño;6;Confirmado
+39;Ricardo;Esposa de chino Julio;Fam Chino Julio;Familia Extendida;1;1;Adulto;6;Confirmado
+40;Ricardo;Abel;Fam Abel;Amistades;1;1;Adulto;7;Confirmado
+41;Ricardo;Hijo de Abel;Fam Abel;Amistades;1;1;Niño;7;Confirmado
+42;Ricardo;Esposa de Abel;Fam Abel;Amistades;1;1;Adulto;7;Confirmado
+43;Ricardo;Fidel;Fam Fidel;Amistades;1;1;Adulto;7;Confirmado
+44;Ricardo;Hijo de Fidel;Fam Fidel;Amistades;1;1;Niño;7;Confirmado
+45;Ricardo;Esposa de Fidel;Fam Fidel;Amistades;1;1;Adulto;7;Confirmado
+46;Ricardo;Janet;Fam Estefany perro;Amistades;1;1;Adulto;8;Confirmado
+47;Ricardo;Estefany (hija del Perro);Fam Estefany perro;Amistades;1;1;Adulto;8;Confirmado
+48;Ricardo;Su hijo de Estefany;Fam Estefany perro;Amistades;1;1;Niño;8;Confirmado
+49;Ricardo;Esposo de Estefany;Fam Estefany perro;Amistades;1;1;Adulto;8;Confirmado
+50;Ricardo;Rómulo;Fam Rómulo;Amistades;1;1;Adulto;8;Confirmado
+51;Ricardo;Hija de Rómulo;Fam Rómulo;Amistades;1;1;Niño;8;Confirmado
+52;Ricardo;Esposa de Rómulo;Fam Rómulo;Amistades;1;1;Adulto;8;Confirmado
+53;Ricardo;Luis Panda;Fam Panda;Amistades;1;1;Adulto;9;Confirmado
+54;Ricardo;Hija de Luis Panda;Fam Panda;Amistades;1;1;Niño;9;Confirmado
+55;Ricardo;Esposa de Luis Panda;Fam Panda;Amistades;1;1;Adulto;9;Confirmado
+56;Ricardo;Martin;Fam Martín;Amistades;1;1;Adulto;9;Confirmado
+57;Ricardo;hijo de Martin;Fam Martín;Amistades;1;1;Niño;9;Confirmado
+58;Ricardo;Esposa de Martín;Fam Martín;Amistades;;1;Adulto;9;Confirmado
+59;Ricardo;Vico;Amigo;Amistades;;1;Adulto;9;Confirmado
+60;Ricardo;Walter;Amigo;Amistades;;1;Adulto;9;Confirmado
+61;Ricardo;Micky;Amigo;Amistades;;1;Adulto;9;Confirmado
+62;Ricardo;Jose;Amigo;Amistades;;1;Adulto;9;Confirmado
